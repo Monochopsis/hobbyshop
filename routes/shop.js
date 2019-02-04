@@ -28,6 +28,8 @@ router.get('/cart', shopController.getCart);
 //route POST for cart
 router.post('/cart', shopController.postCart);
 
+//route POST for cart delete
+router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 //route GET for checkout
 router.get('/checkout', shopController.getCheckout);
 

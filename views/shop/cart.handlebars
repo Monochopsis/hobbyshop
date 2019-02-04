@@ -1,19 +1,84 @@
 
 
-{{!--
- {{#if products}}
- <ul>
-	{{#each products}}
-	<li>{{this.prod_id	}}</li>
-	<li>{{this.qty}}</li>
-</ul>
-	{{/each}}
- {{else}}
-	<h1>NO PRODUCT IN THE CART!</h1>
- {{/if}} --}}
+<!-- checkout -->
+<body>
+	 {{#if products}}
+	<div class="checkout">
+		<div class="container">
+			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains</h3>
+			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Quatity</th>
+							<th>Product Name</th>
+							<th>Price</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					{{#each products}}
+					<tr class="rem1">
+						<td class="invert-image"><a href="single.html"><img src="public/images/prod_1.jpg" alt=" " class="img-responsive" /></a></td>
+						<td class="invert">
+							 <div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value" value = "{{this.qty}}"><span>{{this.qty}}</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
+							</div>
+						</td>
+						<td class="invert">{{this.productData.prod_name}}</td>
+						<td class="invert">{{this.productData.prod_price}}</td>
+						<td class="invert">
+							<form action="/cart-delete-item" method="POST">
+								<input type="hidden" value="{{this.productData.prod_id}}" name="prod_id">
+								<div class="rem">
+									<button class="close1"></button>
+								</div>
+							</form>
+						</td>
+					</tr>
+						{{/each}}
+								<!--quantity-->
+									<script>
+									$('.value-plus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+										divUpd.text(newVal);
+									});
 
-{{#each products}}
-	<li>{{p.products prod_name }}</li>
-{{/each}}
+									$('.value-minus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+										if(newVal>=1) divUpd.text(newVal);
+									});
+									</script>
+								<!--quantity-->
+				</table>
+				 {{else}}
+					<h1>NO PRODUCT IN THE CART!</h1>
+				{{/if}}
+			</div>
+			{{!-- <div class="checkout-left">
+				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+					<h4>Continue to basket</h4>
+					<ul>
 
-<h1>WAW</h1>
+						<li>Total Service Charges <i>-</i> <span>50.00</span></li>
+						<li>Total <i>-</i> <span>3,050</span></li>
+					</ul>
+				</div>
+				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+					<a href="/products"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
+				</div>
+				<div class="clearfix"> </div>
+			</div> --}}
+		</div>
+	</div>
+</body>
+<!-- //checkout -->
+{{!-- {"products":[],"totalPrice":0} --}}
+
+
+
+
