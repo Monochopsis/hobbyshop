@@ -1,0 +1,19 @@
+
+
+{{!--
+ {{#if products}}
+ <ul>
+	{{#each products}}
+	<li>{{this.prod_id	}}</li>
+	<li>{{this.qty}}</li>
+</ul>
+	{{/each}}
+ {{else}}
+	<h1>NO PRODUCT IN THE CART!</h1>
+ {{/if}} --}}
+
+{{#each products}}
+	<li>{{p.products prod_name }}</li>
+{{/each}}
+
+<h1>WAW</h1>

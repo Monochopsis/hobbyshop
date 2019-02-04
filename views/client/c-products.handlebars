@@ -1,0 +1,51 @@
+
+<!-- Client Products -->
+<body>
+
+	<div class="checkout">
+        {{#if prods}}
+		<div class="container">
+			<h1 class="animated wow slideInLeft" data-wow-delay=".5s">My Products</h1><br>
+			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>Product ID</th>
+							<th>Product Image</th>
+                            <th>Product Name</th>
+							<th>Product Description</th>
+							<th>Product Tags</th>
+							<th>Product Price</th>
+							<th>Manage</th>
+						</tr>
+					</thead>
+                    {{#each prods}}
+					<tr class="rem1">
+						<td class="invert">{{this.prod_id}}</td>
+						<td class="invert-image"><a href="single.html"><img src="{{this.prod_imageUrl}}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert">{{this.prod_name}}</td>
+						<td class="invert">{{this.prod_description}}</td>
+						<td class="invert">{{this.prod_tags}}</td>
+						<td class="invert">{{this.prod_price}}</td>
+						<td class="invert">
+
+                            <a href="/client/edit-product/{{this.prod_id}}?edit=true" class = "btn btn-success">EDIT</a> <br><br>
+                            <form action="/client/delete-product" method = "POST">
+                                <input type="hidden" value ="{{this.prod_id}}" name ="prod_id">
+								<button class="btn btn-danger">DEL</button>
+                            </form>
+
+                            </td>
+					</tr>
+                    {{/each}}
+				</table>
+                    {{else}}
+                    <h1>No Product Available!</h1>
+			{{/if}}
+			</div>
+
+		</div>
+	</div>
+</body>
+<!-- //checkout -->
+
