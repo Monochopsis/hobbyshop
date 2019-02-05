@@ -60,8 +60,9 @@ Cart.belongsTo(User);
 Cart.belongsToMany(Product, {through: CartItem});
 Product.belongsToMany(Cart, {through: CartItem});
 
+
 sequelize
-    //  .sync({force: true})
+    // .sync({force: true})
     .sync()
     .then(result =>{
         return User.findById(1);
@@ -74,12 +75,15 @@ sequelize
                 lastName: 'Parayno',
                 phoneNumber: 09454789123,
                 email: 'Mono@gmail.com'
-            })
+            });
         }
         return user;
     })
     .then(user =>{
         // console.log(user);
+        return user.createCart();
+    })
+    .then(cart =>{
         const port = 3000;
         // listen to the server used by express
         app.listen(port,()=>{
