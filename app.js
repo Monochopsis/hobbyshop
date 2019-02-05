@@ -35,6 +35,15 @@ const shopRoutes = require('./routes/shop');
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use((req, res, next) =>{
+    User.findById(1)
+    .then(user =>{
+        req.user = user;
+        next();
+    })
+    .catch(err => console.log(err))
+});
+
 app.use('/admin', adminData.routes);
 app.use('/client', clientRoutes);
 app.use(shopRoutes);
@@ -63,7 +72,7 @@ sequelize
         return user;
     })
     .then(user =>{
-        console.log(user);
+        // console.log(user);
         const port = 3000;
         // listen to the server used by express
         app.listen(port,()=>{

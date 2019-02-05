@@ -14,13 +14,14 @@ exports.postAddProduct = (req, res, next) => {
     const prod_description = req.body.prod_description;
     const prod_price= req.body.prod_price;
     const prod_imageUrl = req.body.prod_imageUrl;
-    Product.create({
+    req.user.createProduct({
         prod_name: prod_name,
         prod_tags: prod_tags,
         prod_description: prod_description,
         prod_price: prod_price,
         prod_imageUrl: prod_imageUrl,
-    }).then(result =>{
+    })
+    .then(result =>{
         // console.log(result);
         console.log('Created Product');
         return res.redirect('/');
@@ -35,8 +36,10 @@ exports.getEditProduct = (req, res, next) => {
         res.redirect('/');
     }
     const prod_id = req.params.prod_id;
-    Product.findById(prod_id)
-    .then(product =>{
+    req.user.getProducts({where: {prod_id: prod_id}})
+    // Product.findById(prod_id)
+    .then(products =>{
+        const product = products[0];
         if (!product) {
             return res.redirect('/');
           }
@@ -76,7 +79,9 @@ exports.postEditProduct = (req, res, next)=>{
 };
 
 exports.getMyProduct = (req, res,next) =>{
-    Product.findAll().then(products =>{
+    req.user
+    .getProducts()
+    .then(products =>{
         res.render('client/c-products', {
             pageTitle: 'All Products',
             path: 'client/c-products',
