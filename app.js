@@ -11,6 +11,8 @@ const path = require('path');
 
 const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
+const Product = require('./models/product');
+const User = require('./models/user')
 // initialize a new name for express
 const app = express();
 
@@ -39,17 +41,36 @@ app.use(shopRoutes);
 
 app.use(errorController.get404Page);
 
+Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
+User.hasMany(Product);
+
 sequelize
-.sync()
-.then(result =>{
-    // console.log(result);
-    const port = 3000;
-    // listen to the server used by express
-    app.listen(port,()=>{
-        console.log(`Server no. running at port ${port}`);
-    });
-})
-.catch(err =>{
-    console.log(err)
-})
+    // .sync({force: true})
+    .sync()
+    .then(result =>{
+        return User.findById(1);
+        // console.log(result);
+    })
+    .then(user =>{
+        if(!user){
+            return User.create({
+                firstName: 'Tine',
+                lastName: 'Parayno',
+                phoneNumber: 09454789123,
+                email: 'Mono@gmail.com'
+            })
+        }
+        return user;
+    })
+    .then(user =>{
+        console.log(user);
+        const port = 3000;
+        // listen to the server used by express
+        app.listen(port,()=>{
+            console.log(`Server no. running at port ${port}`);
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+});
 

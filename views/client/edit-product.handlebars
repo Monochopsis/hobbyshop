@@ -71,7 +71,7 @@
                     <textarea class = "form-control" name="prod_description" id="" cols="30" rows="10" placeholder=" Product Description Here" >{{#if editing }}{{product.prod_description}}{{/if}}</textarea>
                     <br>
                     <label for="price">Price:</label>
-                    <input type= "number" class = "form-control" name = "prod_price" value="{{#if editing }}{{product.prod_price}}{{/if}}"><br/>
+                    <input type= "number" class = "form-control" name = "prod_price" value="{{#if editing }}{{product.prod_price}}{{/if}}" step = "any"><br/>
                     <label for="">Upload Image of the Product here.</label>
                     <input type="search" class = "form-control" name = "prod_imageUrl" class = "form-control-file" id=""value="{{#if editing }}{{product.prod_imageUrl}}{{/if}}">
                     <br>

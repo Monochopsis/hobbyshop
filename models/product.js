@@ -14,7 +14,7 @@ const Product = sequelize.define('product', {
     allowNull: false
   },
   prod_tags: {
-    type: Sequelize.DOUBLE,
+    type: Sequelize.STRING,
     allowNull: false
   },
   prod_description:  {
