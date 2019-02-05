@@ -19,8 +19,8 @@ router.get('/products/delete', shopController.getProducts);
 //route GET for products + id
 router.get('/products/:prod_id', shopController.getProduct);
 
-//route GET for products + id
-router.get('/details', shopController.getDetails);
+// //route GET for products + id
+// router.get('/details', shopController.getDetails);
 
 //route GET for card
 router.get('/cart', shopController.getCart);

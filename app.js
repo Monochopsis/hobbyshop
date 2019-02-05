@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const errorController = require('./controllers/error');
+const db = require('./util/database');
 // initialize a new name for express
 const app = express();
 
@@ -25,6 +26,8 @@ app.set('views', path.join(__dirname, '/views'));
 const adminData = require('./routes/admin');
 const clientRoutes = require('./routes/client');
 const shopRoutes = require('./routes/shop');
+
+
 
 // static files middleware path (css,image, javscript)
 app.use(express.static(__dirname));

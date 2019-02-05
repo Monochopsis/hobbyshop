@@ -22,9 +22,14 @@ exports.postAddProduct = (req, res, next) => {
         prod_price,
         prod_imageUrl,
     );
-    product.save();
-    res.redirect('/');
+    product
+    .save()
+    .then(()=> {
+        res.redirect('/');
+    })
+    .catch(err => console.log(err));
   };
+
 exports.getEditProduct = (req, res, next) => {
     const editMode = req.query.edit;
     if(!editMode){
