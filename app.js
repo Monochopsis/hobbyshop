@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const errorController = require('./controllers/error');
-const db = require('./util/database');
+const sequelize = require('./util/database');
 // initialize a new name for express
 const app = express();
 
@@ -39,8 +39,17 @@ app.use(shopRoutes);
 
 app.use(errorController.get404Page);
 
-const port = 3000;
-// listen to the server used by express
-app.listen(port,()=>{
-    console.log(`Server no. running at port ${port}`);
-});
+sequelize
+.sync()
+.then(result =>{
+    // console.log(result);
+    const port = 3000;
+    // listen to the server used by express
+    app.listen(port,()=>{
+        console.log(`Server no. running at port ${port}`);
+    });
+})
+.catch(err =>{
+    console.log(err)
+})
+
