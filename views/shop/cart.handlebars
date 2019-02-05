@@ -19,7 +19,7 @@
 					</thead>
 					{{#each products}}
 					<tr class="rem1">
-						<td class="invert-image"><a href="single.html"><img src="{{this.productData.prod_imageUrl}}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert-image"><a href="single.html"><img src="{{this.productData.imageUrl}}" alt=" " class="img-responsive" /></a></td>
 						<td class="invert">
 							 <div class="quantity">
 								<div class="quantity-select">
@@ -29,11 +29,11 @@
 								</div>
 							</div>
 						</td>
-						<td class="invert">{{this.productData.prod_name}}</td>
-						<td class="invert">{{this.productData.prod_price}}</td>
+						<td class="invert">{{this.productData.name}}</td>
+						<td class="invert">{{this.productData.price}}</td>
 						<td class="invert">
 							<form action="/cart-delete-item" method="POST">
-								<input type="hidden" value="{{this.productData.prod_id}}" name="prod_id">
+								<input type="hidden" value="{{this.productData.id}}" name="id">
 								<div class="rem">
 									<button class="close1"></button>
 								</div>

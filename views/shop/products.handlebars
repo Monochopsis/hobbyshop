@@ -93,13 +93,13 @@
 					<div class="new-products-grids">
 						<div class="new-products-grid">
 							<div class="new-products-grid-left">
-								<a href="single.html"><img src="public/images/prod_1.jpg" alt=" " class="img-responsive" /></a>
+								<a href="single.html"><img src="public/images/1.jpg" alt=" " class="img-responsive" /></a>
 							</div>
 							<div class="new-products-grid-right">
 								<h4><a href="single.html">occaecat cupidatat</a></h4>
 								<div class="rating">
 									<div class="rating-left">
-										<img src="public/images/prod_1.jpg" alt=" " class="img-responsive">
+										<img src="public/images/1.jpg" alt=" " class="img-responsive">
 									</div>
 									<div class="clearfix"> </div>
 								</div>
@@ -111,13 +111,13 @@
 						</div>
 						<div class="new-products-grid">
 							<div class="new-products-grid-left">
-								<a href="single.html"><img src="public/images/prod_1.jpg" alt=" " class="img-responsive" /></a>
+								<a href="single.html"><img src="public/images/1.jpg" alt=" " class="img-responsive" /></a>
 							</div>
 							<div class="new-products-grid-right">
 								<h4><a href="single.html">eum fugiat quo</a></h4>
 								<div class="rating">
 									<div class="rating-left">
-										<img src="public/images/prod_1.jpg" alt=" " class="img-responsive">
+										<img src="public/images/1.jpg" alt=" " class="img-responsive">
 									</div>
 									<div class="clearfix"> </div>
 								</div>
@@ -129,13 +129,13 @@
 						</div>
 						<div class="new-products-grid">
 							<div class="new-products-grid-left">
-								<a href="single.html"><img src="public/images/prod_1.jpg" alt=" " class="img-responsive" /></a>
+								<a href="single.html"><img src="public/images/1.jpg" alt=" " class="img-responsive" /></a>
 							</div>
 							<div class="new-products-grid-right">
 								<h4><a href="single.html">officia deserunt</a></h4>
 								<div class="rating">
 									<div class="rating-left">
-										<img src="public/images/prod_1.jpg" alt=" " class="img-responsive">
+										<img src="public/images/1.jpg" alt=" " class="img-responsive">
 									</div>
 									<div class="clearfix"> </div>
 								</div>
@@ -181,24 +181,24 @@
 						{{#each prods}}
 						<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
 							<div class="new-collections-grid1-image">
-								<a href="single.html" class="product-image"><img src="{{this.prod_imageUrl}}" alt=" " class="img-responsive"></a>
+								<a href="single.html" class="product-image"><img src="{{this.imageUrl}}" alt=" " class="img-responsive"></a>
 								<div class="new-collections-grid1-image-pos products-right-grids-pos">
-									<a href="/products/{{this.prod_id}}">Quick View</a>
+									<a href="/products/{{this.id}}">Quick View</a>
 								</div>
 								<div class="new-collections-grid1-right products-right-grids-pos-right">
 									<div class="rating">
 										<div class="rating-left">
-											<img src="public/images/prod_1.jpg" alt=" " class="img-responsive">
+											<img src="public/images/1.jpg" alt=" " class="img-responsive">
 										</div>
 										<div class="clearfix"> </div>
 									</div>
 								</div>
-								<h4><a href="single.html">{{this.prod_name}}</a></h4>
+								<h4><a href="single.html">{{this.name}}</a></h4>
 								<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-									<p><i>PHP{{this.prod_price}}</i> <span class="item_price">{{this.prod_price}}</span>
+									<p><i>PHP{{this.price}}</i> <span class="item_price">{{this.price}}</span>
 									<form action="/cart" method = "POST">
 										<button class="add-to-cart btn btn-default">add to cart</button>
-										<input type="hidden" name="prod_id" value="{{this.prod_id}}">
+										<input type="hidden" name="id" value="{{this.id}}">
               						</form></p>
 								</div>
 							</div>

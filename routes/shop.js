@@ -17,7 +17,7 @@ router.get('/products', shopController.getProducts);
 router.get('/products/delete', shopController.getProducts);
 
 //route GET for products + id
-router.get('/products/:prod_id', shopController.getProduct);
+router.get('/products/:id', shopController.getProduct);
 
 // //route GET for products + id
 // router.get('/details', shopController.getDetails);

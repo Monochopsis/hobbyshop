@@ -21,17 +21,17 @@
 					</thead>
                     {{#each prods}}
 					<tr class="rem1">
-						<td class="invert">{{this.prod_id}}</td>
-						<td class="invert-image"><a href="single.html"><img src="{{this.prod_imageUrl}}" alt=" " class="img-responsive" /></a></td>
-						<td class="invert">{{this.prod_name}}</td>
-						<td class="invert">{{this.prod_description}}</td>
-						<td class="invert">{{this.prod_tags}}</td>
-						<td class="invert">{{this.prod_price}}</td>
+						<td class="invert">{{this.id}}</td>
+						<td class="invert-image"><a href="single.html"><img src="{{this.imageUrl}}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert">{{this.name}}</td>
+						<td class="invert">{{this.description}}</td>
+						<td class="invert">{{this.tags}}</td>
+						<td class="invert">{{this.price}}</td>
 						<td class="invert">
 
-                            <a href="/client/edit-product/{{this.prod_id}}?edit=true" class = "btn btn-success">EDIT</a> <br><br>
+                            <a href="/client/edit-product/{{this.id}}?edit=true" class = "btn btn-success">EDIT</a> <br><br>
                             <form action="/client/delete-product" method = "POST">
-                                <input type="hidden" value ="{{this.prod_id}}" name ="prod_id">
+                                <input type="hidden" value ="{{this.id}}" name ="id">
 								<button class="btn btn-danger">DEL</button>
                             </form>
 

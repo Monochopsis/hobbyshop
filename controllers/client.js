@@ -9,17 +9,17 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-    const prod_name = req.body.prod_name;
-    const prod_tags = req.body.prod_tags;
-    const prod_description = req.body.prod_description;
-    const prod_price= req.body.prod_price;
-    const prod_imageUrl = req.body.prod_imageUrl;
+    const name = req.body.name;
+    const tags = req.body.tags;
+    const description = req.body.description;
+    const price= req.body.price;
+    const imageUrl = req.body.imageUrl;
     req.user.createProduct({
-        prod_name: prod_name,
-        prod_tags: prod_tags,
-        prod_description: prod_description,
-        prod_price: prod_price,
-        prod_imageUrl: prod_imageUrl,
+        name: name,
+        tags: tags,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
     })
     .then(result =>{
         // console.log(result);
@@ -35,9 +35,9 @@ exports.getEditProduct = (req, res, next) => {
     if(!editMode){
         res.redirect('/');
     }
-    const prod_id = req.params.prod_id;
-    req.user.getProducts({where: {prod_id: prod_id}})
-    // Product.findById(prod_id)
+    const id = req.params.id;
+    req.user.getProducts({where: {id: id}})
+    // Product.findById(id)
     .then(products =>{
         const product = products[0];
         if (!product) {
@@ -55,19 +55,19 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next)=>{
-    const prod_id = req.body.prod_id;
-    const updatedProd_name = req.body.prod_name;
-    const updatedProd_tags = req.body.prod_tags;
-    const updatedProd_description = req.body.prod_description;
-    const updatedProd_price = req.body.prod_price;
-    const updatedProd_imageUrl = req.body.prod_imageUrl;
-    Product.findById(prod_id)
+    const id = req.body.id;
+    const updatedname = req.body.name;
+    const updatedtags = req.body.tags;
+    const updateddescription = req.body.description;
+    const updatedprice = req.body.price;
+    const updatedimageUrl = req.body.imageUrl;
+    Product.findById(id)
     .then(product =>{
-        product.prod_name = updatedProd_name,
-        product.prod_tags = updatedProd_tags,
-        product.prod_description = updatedProd_description,
-        product.prod_price = updatedProd_price,
-        product.prod_imageUrl = updatedProd_imageUrl
+        product.name = updatedname,
+        product.tags = updatedtags,
+        product.description = updateddescription,
+        product.price = updatedprice,
+        product.imageUrl = updatedimageUrl
         return product.save();
     })
     .then(result =>{
@@ -93,8 +93,8 @@ exports.getMyProduct = (req, res,next) =>{
 
 
 exports.postDeleteProduct = (req, res, next) =>{
-    const prod_id = req.body.prod_id;
-    Product.findById(prod_id).then(product =>{
+    const id = req.body.id;
+    Product.findById(id).then(product =>{
         return product.destroy();
     })
     .then(result =>{

@@ -3,29 +3,29 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
 const Product = sequelize.define('product', {
-  prod_id: {
+  id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true
   },
-  prod_name: {
+  name: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  prod_tags: {
+  tags: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  prod_description:  {
+  description:  {
     type: Sequelize.STRING,
     allowNull: false
   },
-  prod_price:  {
+  price:  {
     type: Sequelize.DOUBLE,
     allowNull: false
   },
-  prod_imageUrl:  {
+  imageUrl:  {
     type: Sequelize.STRING,
     allowNull: false
   }

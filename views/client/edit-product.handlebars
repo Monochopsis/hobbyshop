@@ -65,29 +65,29 @@
             <p class="est animated wow zoomIn" data-wow-delay=".5s">Add your Products here</p>
             <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
                 <form action = "/client/{{#if editing }}edit-product{{else}}add-product{{/if}}" method="POST">
-                    <input type="search" class = "form-control" name="prod_name" id="" placeholder="Product Name" value="{{#if editing }}{{product.prod_name}}{{/if}}"> <br>
-                    <input  value="" name ="prod_tags" data-role="tagsinput" placeholder="Add Tags" />
+                    <input type="search" class = "form-control" name="name" id="" placeholder="Product Name" value="{{#if editing }}{{product.name}}{{/if}}"> <br>
+                    <input  value="" name ="tags" data-role="tagsinput" placeholder="Add Tags" />
                     <br><br>
-                    <textarea class = "form-control" name="prod_description" id="" cols="30" rows="10" placeholder=" Product Description Here" >{{#if editing }}{{product.prod_description}}{{/if}}</textarea>
+                    <textarea class = "form-control" name="description" id="" cols="30" rows="10" placeholder=" Product Description Here" >{{#if editing }}{{product.description}}{{/if}}</textarea>
                     <br>
                     <label for="price">Price:</label>
-                    <input type= "number" class = "form-control" name = "prod_price" value="{{#if editing }}{{product.prod_price}}{{/if}}" step = "any"><br/>
+                    <input type= "number" class = "form-control" name = "price" value="{{#if editing }}{{product.price}}{{/if}}" step = "any"><br/>
                     <label for="">Upload Image of the Product here.</label>
-                    <input type="search" class = "form-control" name = "prod_imageUrl" class = "form-control-file" id=""value="{{#if editing }}{{product.prod_imageUrl}}{{/if}}">
+                    <input type="search" class = "form-control" name = "imageUrl" class = "form-control-file" id=""value="{{#if editing }}{{product.imageUrl}}{{/if}}">
                     <br>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="prod_mode">
+                        <input class="form-check-input" type="checkbox" name="mode">
                         <label class="form-check-label">
                             Pick and Pay
                         </label>
                         <br>
-                        <input class="form-check-input" type="checkbox" name="prod_mode">
+                        <input class="form-check-input" type="checkbox" name="mode">
                         <label class="form-check  -label">
                             Pay with Credit Card
                         </label>
                     </div>
                     {{#if editing }}
-                    <input type="hidden" value = "{{product.prod_id}}" name="prod_id">
+                    <input type="hidden" value = "{{product.id}}" name="id">
                     {{/if}}
 
                     <input type="submit" value="{{#if editing }}UPDATE PRODUCT{{else}}ADD{{/if}}">
@@ -146,7 +146,7 @@
       this.inputSize = Math.max(1, this.placeholderText.length);
 
       this.$container = $('<div class="bootstrap-tagsinput"></div>');
-      this.$input = $('<input type="search" value="{{#if editing }}{{product.prod_tags}}{{/if}}," class = "form-control" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+      this.$input = $('<input type="search" value="{{#if editing }}{{product.tags}}{{/if}}," class = "form-control" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
       this.$element.before(this.$container);
 
