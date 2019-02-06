@@ -30,8 +30,12 @@ router.post('/cart', shopController.postCart);
 
 //route POST for cart delete
 router.post('/cart-delete-item', shopController.postCartDeleteProduct);
-//route GET for checkout
-router.get('/checkout', shopController.getCheckout);
+
+//route POST for creating order
+router.post('/create-order', shopController.postOrder)
+
+// //route GET for checkout
+// router.get('/checkout', shopController.getCheckout);
 
 //route GET for orders
 router.get('/orders', shopController.getOrders);
