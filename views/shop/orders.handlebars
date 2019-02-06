@@ -1,15 +1,19 @@
 {{#if orders}}
-    {{#each orders}}
+
     <ul>
+        {{#each orders}}
 
             <h1>This is ORDER ID: {{this.id}}</h1>
-
-        <li>
-            <h1>This is Order Item ID: {{this.orderItem.id}}</h1>
-        </li>
-         <li>
-            <h1>This is Product Name: {{this.products.name}}({{this.orderItem.quantity}})</h1>
-        </li>
+    </ul>
+    <ul>
+        {{#each this.products}}
+            <li>
+                <h1>This is Order Item ID: {{this.orderItem.id}}</h1>
+            </li>
+            <li>
+                <h1>This is Product Name: {{this.name}}({{this.orderItem.quantity}})</h1>
+            </li>
+        {{/each}}
         {{!-- <li>
             <h1>Price:{{this.price}}</h1>
         </li> --}}

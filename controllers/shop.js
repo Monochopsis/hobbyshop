@@ -172,7 +172,7 @@ exports.getOrders = (req,res,next)=>{
     req.user
     .getOrders({include: ['products']})
     .then(orders =>{
-       console.log('Orders: ', JSON.stringify(orders));
+    //    console.log('Orders: ', JSON.stringify(orders));
         res.render('shop/orders',{
             pageTitle: 'Your Orders',
             path: '/orders',
