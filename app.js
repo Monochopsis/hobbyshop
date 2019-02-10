@@ -10,15 +10,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const errorController = require('./controllers/error');
-const sequelize = require('./util/database');
+const mongoConnect = require('./util/database').mongoConnect;
 
-//Require Models HERE!
-const Product = require('./models/product');
-const User = require('./models/user');
-const Cart = require('./models/cart');
-const CartItem = require('./models/cart-item');
-const Order = require('./models/order');
-const OrderItem = require('./models/order-item');
 
 // initialize a new name for express
 const app = express();
@@ -43,12 +36,13 @@ app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) =>{
-    User.findById(1)
-    .then(user =>{
-        req.user = user;
-        next();
-    })
-    .catch(err => console.log(err))
+    // User.findById(1)
+    // .then(user =>{
+    //     req.user = user;
+    //     next();
+    // })
+    // .catch(err => console.log(err))
+    next();
 });
 
 app.use('/admin', adminData.routes);
@@ -57,50 +51,7 @@ app.use(shopRoutes);
 
 app.use(errorController.get404Page);
 
-//ASSOCIATIONS
-Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
-User.hasMany(Product);
-User.hasOne(Cart);
-Cart.belongsTo(User);
-Cart.belongsToMany(Product, {through: CartItem});
-Product.belongsToMany(Cart, {through: CartItem});
-Order.belongsTo(User);
-User.hasMany(Order);
-Order.belongsToMany(Product, {through: OrderItem});
 
-
-
-
-sequelize
-    // .sync({force: true})
-    .sync()
-    .then(result =>{
-        return User.findById(1);
-        // console.log(result);
-    })
-    .then(user =>{
-        if(!user){
-            return User.create({
-                firstName: 'Tine',
-                lastName: 'Parayno',
-                phoneNumber: 09454789123,
-                email: 'Mono@gmail.com'
-            });
-        }
-        return user;
-    })
-    .then(user =>{
-        // console.log(user);
-        return user.createCart();
-    })
-    .then(cart =>{
-        const port = 3000;
-        // listen to the server used by express
-        app.listen(port,()=>{
-            console.log(`Server no. running at port ${port}`);
-        });
-    })
-    .catch(err =>{
-        console.log(err);
-});
-
+mongoConnect(() =>{
+    app.listen(3000);
+})

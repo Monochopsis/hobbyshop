@@ -87,7 +87,7 @@
                         </label>
                     </div>
                     {{#if editing }}
-                    <input type="hidden" value = "{{product.id}}" name="id">
+                    <input type="hidden" value = "{{product._id}}" name="id">
                     {{/if}}
 
                     <input type="submit" value="{{#if editing }}UPDATE PRODUCT{{else}}ADD{{/if}}">

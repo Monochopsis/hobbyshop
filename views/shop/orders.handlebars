@@ -3,12 +3,12 @@
     <ul>
         {{#each orders}}
 
-            <h1>This is ORDER ID: {{this.id}}</h1>
+            <h1>This is ORDER ID: {{this._id}}</h1>
     </ul>
     <ul>
         {{#each this.products}}
             <li>
-                <h1>This is Order Item ID: {{this.orderItem.id}}</h1>
+                <h1>This is Order Item ID: {{this.orderItem._id}}</h1>
             </li>
             <li>
                 <h1>This is Product Name: {{this.name}}({{this.orderItem.quantity}})</h1>

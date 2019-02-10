@@ -23,42 +23,42 @@ router.get('/products/:id', shopController.getProduct);
 // router.get('/details', shopController.getDetails);
 
 //route GET for card
-router.get('/cart', shopController.getCart);
+// router.get('/cart', shopController.getCart);
 
 //route POST for cart
-router.post('/cart', shopController.postCart);
+// router.post('/cart', shopController.postCart);
 
 //route POST for cart delete
-router.post('/cart-delete-item', shopController.postCartDeleteProduct);
+// router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
 //route POST for creating order
-router.post('/create-order', shopController.postOrder)
+// router.post('/create-order', shopController.postOrder)
 
 // //route GET for checkout
 // router.get('/checkout', shopController.getCheckout);
 
 //route GET for orders
-router.get('/orders', shopController.getOrders);
+// router.get('/orders', shopController.getOrders);
 
-router.get('/login', (req,res)=>{
-    res.render('login', {pageTitle: 'Login'});
-});
-//route GET for register
-router.get('/register', (req,res)=>{
-    res.render('register',{pageTitle: 'Register'});
-});
-//route GET for premium
-router.get('/premium',(req,res)=>{
-    res.render('premium',{
-        pageTitle: 'Premium'
-    });
-});
+// router.get('/login', (req,res)=>{
+//     res.render('login', {pageTitle: 'Login'});
+// });
+// //route GET for register
+// router.get('/register', (req,res)=>{
+//     res.render('register',{pageTitle: 'Register'});
+// });
+// //route GET for premium
+// router.get('/premium',(req,res)=>{
+//     res.render('premium',{
+//         pageTitle: 'Premium'
+//     });
+// });
 
-//route GET for auction
-router.get('/auction',(req,res)=>{
-    res.render('auction',{
-        pageTitle: 'Auction',
-    });
-});
+// //route GET for auction
+// router.get('/auction',(req,res)=>{
+//     res.render('auction',{
+//         pageTitle: 'Auction',
+//     });
+// });
 
 module.exports = router;
