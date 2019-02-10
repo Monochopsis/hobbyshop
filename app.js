@@ -11,7 +11,7 @@ const path = require('path');
 
 const errorController = require('./controllers/error');
 const mongoConnect = require('./util/database').mongoConnect;
-
+const User = require('./models/user');
 
 // initialize a new name for express
 const app = express();
@@ -36,13 +36,17 @@ app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) =>{
-    // User.findById(1)
-    // .then(user =>{
-    //     req.user = user;
-    //     next();
-    // })
-    // .catch(err => console.log(err))
-    next();
+    User.findById('5c6037b0b2fb2337702f79c6')
+        .then(user =>{
+            req.user = new User(
+                user.name,
+                user.email,
+                user.cart,
+                user._id
+            );
+            next();
+        })
+        .catch(err => console.log(err))
 });
 
 app.use('/admin', adminData.routes);
@@ -54,4 +58,4 @@ app.use(errorController.get404Page);
 
 mongoConnect(() =>{
     app.listen(3000);
-})
+});

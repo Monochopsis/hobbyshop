@@ -23,10 +23,10 @@ router.get('/products/:id', shopController.getProduct);
 // router.get('/details', shopController.getDetails);
 
 //route GET for card
-// router.get('/cart', shopController.getCart);
+router.get('/cart', shopController.getCart);
 
 //route POST for cart
-// router.post('/cart', shopController.postCart);
+router.post('/cart', shopController.postCart);
 
 //route POST for cart delete
 // router.post('/cart-delete-item', shopController.postCartDeleteProduct);
@@ -40,13 +40,9 @@ router.get('/products/:id', shopController.getProduct);
 //route GET for orders
 // router.get('/orders', shopController.getOrders);
 
-// router.get('/login', (req,res)=>{
-//     res.render('login', {pageTitle: 'Login'});
-// });
-// //route GET for register
-// router.get('/register', (req,res)=>{
-//     res.render('register',{pageTitle: 'Register'});
-// });
+router.get('/login', shopController.loginUser);
+router.get('/register', shopController.registerUser);
+
 // //route GET for premium
 // router.get('/premium',(req,res)=>{
 //     res.render('premium',{

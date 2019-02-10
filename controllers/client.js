@@ -16,7 +16,15 @@ exports.postAddProduct = (req, res, next) => {
     const description = req.body.description;
     const price= req.body.price;
     const imageUrl = req.body.imageUrl;
-    const product = new Product(name, tags, description, price, imageUrl);
+    const product = new Product(
+        name,
+        tags,
+        description,
+        price,
+        imageUrl,
+        null,
+        req.user._id
+    );
     product
     .save()
     .then(result =>{
@@ -63,9 +71,8 @@ exports.postEditProduct = (req, res, next)=>{
             updateddescription,
             updatedprice,
             updatedimageUrl,
-            id
         )
-        return product.save()
+        product.save()
         .then(() =>{
         console.log('UPDATED PRODUCT');
         res.redirect('/client/c-products');
