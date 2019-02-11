@@ -89,7 +89,7 @@
                     {{#if editing }}
                     <input type="hidden" value = "{{product._id}}" name="id">
                     {{/if}}
-
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
                     <input type="submit" value="{{#if editing }}UPDATE PRODUCT{{else}}ADD{{/if}}">
 				</form>
             </div>

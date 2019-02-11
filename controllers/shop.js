@@ -34,8 +34,7 @@ exports.getProduct = (req, res, next)=>{
 exports.getIndex = (req,res,next) =>{
         res.render('shop/index', {
             pageTitle: 'Hobby Shop  ',
-            path: '/',
-            isAuthenticated: req.session.isLoggedIn
+            path: '/'
         });
 };
 

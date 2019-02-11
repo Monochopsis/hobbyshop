@@ -28,14 +28,14 @@
 						<td class="invert">{{this.tags}}</td>
 						<td class="invert">{{this.price}}</td>
 						<td class="invert">
-
                             <a href="/client/edit-product/{{this._id}}?edit=true" class = "btn btn-success">EDIT</a> <br><br>
                             <form action="/client/delete-product" method = "POST">
                                 <input type="hidden" value ="{{this._id}}" name ="id">
+								<input type="hidden" name="_csrf" value="{{csrfToken}}">
 								<button class="btn btn-danger">DEL</button>
                             </form>
 
-                            </td>
+                        </td>
 					</tr>
                     {{/each}}
 				</table>

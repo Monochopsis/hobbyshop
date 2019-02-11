@@ -206,6 +206,7 @@ img {
               <br>
               {{#if isAuthenticated}}
                 <form action="/cart" method = "POST">
+                  <input type="hidden" name="_csrf" value="{{csrfToken}}">
                   <button class="add-to-cart btn btn-default">add to cart</button>
                   <input type="hidden" name="id" value="{{product._id}}">
                 </form>

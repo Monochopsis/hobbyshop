@@ -16,6 +16,7 @@
 							{{else}}
 								<li>
 									<form action="/logout" method = "POST">
+										<input type="hidden" name="_csrf" value="{{csrfToken}}">
 										<button type ="submit" class ="btn btn-dark">Logout</button>
 									</form>
 								</li>
