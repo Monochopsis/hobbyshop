@@ -21,8 +21,10 @@ const MONGODB_URI = 'mongodb+srv://tine:tine@hobbyshop-teksk.azure.mongodb.net/h
 const app = express();
 const store = new MongoDBStore({
     uri: MONGODB_URI,
-    collection: 'sessions'
+    collection: 'sessions',
   });
+
+
 
 
 app.engine('handlebars', exphbs({
@@ -52,6 +54,18 @@ app.use(
       store: store
     })
   );
+app.use((req, res, next) => {
+    if (!req.session.user) {
+      return next();
+    }
+    User.findById(req.session.user._id)
+      .then(user => {
+        req.user = user;
+        next();
+      })
+      .catch(err => console.log(err));
+});
+
 
 
 
