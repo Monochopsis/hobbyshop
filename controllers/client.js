@@ -7,6 +7,7 @@ exports.getAddProduct = (req, res, next) => {
         pageTitle: 'Add Product',
         path: 'client/add-product',
         editing: false,
+        isAuthenticated: req.session.isLoggedIn
     });
 };
 
@@ -16,22 +17,22 @@ exports.postAddProduct = (req, res, next) => {
     const description = req.body.description;
     const price= req.body.price;
     const imageUrl = req.body.imageUrl;
-    const product = new Product(
-        name,
-        tags,
-        description,
-        price,
-        imageUrl,
-        null,
-        req.user._id
-    );
+    const product = new Product({
+        name: name,
+        tags: tags,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
+        userId: req.session.user
+    });
     product
     .save()
     .then(result =>{
         // console.log(result);
         console.log('Created Product');
         return res.redirect('/');
-    }).catch(err =>{
+    })
+    .catch(err =>{
         console.log(err);
     })
   };
@@ -51,7 +52,8 @@ exports.getEditProduct = (req, res, next) => {
             pageTitle: 'Edit Product',
             path: 'client/edit-product',
             editing: editMode,
-            product: product
+            product: product,
+            isAuthenticated: req.session.isLoggedIn
         });
     })
     .catch(err => console.log(err))
@@ -60,34 +62,39 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next)=>{
     const id = req.body.id;
-    const updatedname = req.body.name;
-    const updatedtags = req.body.tags;
-    const updateddescription = req.body.description;
-    const updatedprice = req.body.price;
-    const updatedimageUrl = req.body.imageUrl;
-        const product = new Product(
-            updatedname,
-            updatedtags,
-            updateddescription,
-            updatedprice,
-            updatedimageUrl,
-        )
-        product.save()
-        .then(() =>{
-        console.log('UPDATED PRODUCT');
-        res.redirect('/client/c-products');
-    })
-    .catch(err => console.log(err))
+    const updatedName = req.body.name;
+    const updatedTags = req.body.tags;
+    const updatedDescription = req.body.description;
+    const updatedPrice = req.body.price;
+    const updatedImageUrl = req.body.imageUrl;
 
-};
+    Product.findById(id)
+        .then(product =>{
+            product.name = updatedName;
+            product.tags = updatedTags;
+            product.description = updatedDescription;
+            product.price = updatedPrice;
+            product.imageUrl = updatedImageUrl
+            return product.save()
+        })
+        .then(() =>{
+            console.log('UPDATED PRODUCT');
+            res.redirect('/client/c-products');
+        })
+        .catch(err => console.log(err))
+    };
 
 exports.getMyProduct = (req, res,next) =>{
-    Product.fetchAll()
+    Product.find()
+    // .select('title price -_id')
+    // .populate('userId', 'name')
     .then(products =>{
+        console.log(products)
         res.render('client/c-products', {
             pageTitle: 'All Products',
             path: 'client/c-products',
             prods:products,
+            isAuthenticated: req.session.isLoggedIn
         });
     })
     .catch(err => console.log(err))
@@ -96,7 +103,7 @@ exports.getMyProduct = (req, res,next) =>{
 
 exports.postDeleteProduct = (req, res, next) =>{
     const id = req.body.id;
-    Product.deleteById(id)
+    Product.findByIdAndRemove(id)
     .then(() =>{
         console.log('DESTROYED PRODUCT!')
         res.redirect('/client/c-products');

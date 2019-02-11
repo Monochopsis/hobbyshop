@@ -11,7 +11,7 @@
 					<thead>
 						<tr>
 							<th>Product</th>
-							<th>Quatity</th>
+							<th>Quantity</th>
 							<th>Product Name</th>
 							<th>Price</th>
 							<th>Remove</th>
@@ -19,21 +19,21 @@
 					</thead>
 					{{#each products}}
 					<tr class="rem1">
-						<td class="invert-image"><a href="single.html"><img src="{{this.imageUrl}}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert-image"><a href="single.html"><img src="{{this.productId.imageUrl}}" alt=" " class="img-responsive" /></a></td>
 						<td class="invert">
 							 <div class="quantity">
 								<div class="quantity-select">
 									<div class="entry value-minus">&nbsp;</div><br>
-									<div class="entry value" value = "{{this.quantity}}"><span>{{p.quantity}}</span></div><br>
+									<div class="entry value" value = "{{this.quantity}}"><span>{{this.quantity}}</span></div><br>
 									<div class="entry value-plus active">&nbsp;</div>
 								</div>
 							</div>
 						</td>
-						<td class="invert">{{this.name}}</td>
-						<td class="invert">{{this.price}}</td>
+						<td class="invert">{{this.productId.name}}</td>
+						<td class="invert">{{this.productId.price}}</td>
 						<td class="invert">
 							<form action="/cart-delete-item" method="POST">
-								<input type="hidden" value="{{this._id}}" name="id">
+								<input type="hidden" value="{{this.productId._id}}" name="id">
 								<div class="rem">
 									<button class="close1"></button>
 								</div>

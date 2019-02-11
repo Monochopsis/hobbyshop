@@ -14,7 +14,7 @@ router.get('/', shopController.getIndex);
 router.get('/products', shopController.getProducts);
 
 //route GET for products + id
-router.get('/products/delete', shopController.getProducts);
+// router.get('/products/delete', shopController.getProducts);
 
 //route GET for products + id
 router.get('/products/:id', shopController.getProduct);
@@ -29,19 +29,19 @@ router.get('/cart', shopController.getCart);
 router.post('/cart', shopController.postCart);
 
 //route POST for cart delete
-// router.post('/cart-delete-item', shopController.postCartDeleteProduct);
+router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
 //route POST for creating order
-// router.post('/create-order', shopController.postOrder)
+router.post('/create-order', shopController.postOrder)
 
+//route GET for orders
+router.get('/orders', shopController.getOrders);
 // //route GET for checkout
 // router.get('/checkout', shopController.getCheckout);
 
-//route GET for orders
-// router.get('/orders', shopController.getOrders);
 
-router.get('/login', shopController.loginUser);
-router.get('/register', shopController.registerUser);
+
+// router.get('/register', shopController.registerUser);
 
 // //route GET for premium
 // router.get('/premium',(req,res)=>{

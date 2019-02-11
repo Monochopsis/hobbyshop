@@ -8,13 +8,22 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 // require path function
 const path = require('path');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
+
+const MONGODB_URI = 'mongodb+srv://tine:tine@hobbyshop-teksk.azure.mongodb.net/hobbyshop';
 
 // initialize a new name for express
 const app = express();
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+  });
+
 
 app.engine('handlebars', exphbs({
     layoutsDir: 'views/layouts/',
@@ -25,37 +34,54 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, '/views'));
 
 
-const adminData = require('./routes/admin');
+// const adminData = require('./routes/admin');
 const clientRoutes = require('./routes/client');
 const shopRoutes = require('./routes/shop');
+const authRoutes = require('./routes/auth');
 
 
 
 // static files middleware path (css,image, javscript)
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+    session({
+      secret: 'my secret',
+      resave: false,
+      saveUninitialized: false,
+      store: store
+    })
+  );
 
-app.use((req, res, next) =>{
-    User.findById('5c6037b0b2fb2337702f79c6')
-        .then(user =>{
-            req.user = new User(
-                user.name,
-                user.email,
-                user.cart,
-                user._id
-            );
-            next();
-        })
-        .catch(err => console.log(err))
-});
 
-app.use('/admin', adminData.routes);
+
+// app.use('/admin', adminData.routes);
 app.use('/client', clientRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 
 app.use(errorController.get404Page);
 
 
-mongoConnect(() =>{
-    app.listen(3000);
-});
+mongoose
+    .connect(MONGODB_URI)
+    .then(result =>{
+        User.findOne().then(user =>{
+            if(!user){
+                const user = new User({
+                    name: 'Tine',
+                    email: 'tine@test.com',
+                    cart: {
+                        items: []
+                    }
+                });
+                user.save();
+
+            }
+        })
+        console.log('Connected!')
+        app.listen(3000);
+    })
+    .catch(err =>{
+        console.log(err)
+    })

@@ -196,18 +196,21 @@
 								<h4><a href="single.html">{{this.name}}</a></h4>
 								<div class="simpleCart_shelfItem products-right-grid1-add-cart">
 									<p><i>PHP{{this.price}}</i> <span class="item_price">{{this.price}}</span>
-									<form action="/cart" method = "POST">
+									{{#if isAuthenticated}}
+										<form action="/cart" method = "POST">
 										<button class="add-to-cart btn btn-default">add to cart</button>
-										<input type="hidden" name="id" value="{{this._id}}">
-              						</form></p>
+										<input type="hidden" name="id" value="{{product._id}}">
+										</form>
+									{{/if}}
 								</div>
 							</div>
 						</div>
 						{{/each}}
 					</div>
-						{{else}}
+					{{else}}
 					<h1>No Product Available!</h1>
 					{{/if}}
+
 				</div>
 
 
