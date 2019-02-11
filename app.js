@@ -66,9 +66,6 @@ app.use((req, res, next) => {
       .catch(err => console.log(err));
 });
 
-
-
-
 // app.use('/admin', adminData.routes);
 app.use('/client', clientRoutes);
 app.use(shopRoutes);
@@ -80,21 +77,8 @@ app.use(errorController.get404Page);
 mongoose
     .connect(MONGODB_URI)
     .then(result =>{
-        User.findOne().then(user =>{
-            if(!user){
-                const user = new User({
-                    name: 'Tine',
-                    email: 'tine@test.com',
-                    cart: {
-                        items: []
-                    }
-                });
-                user.save();
-
-            }
-        })
-        console.log('Connected!')
-        app.listen(3000);
+      console.log('Connected!')
+      app.listen(3000);
     })
     .catch(err =>{
         console.log(err)
