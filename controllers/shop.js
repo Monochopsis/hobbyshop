@@ -46,7 +46,7 @@ exports.getCart = (req, res, next) =>{
                 pageTitle: 'Your Cart',
                 path: '/cart',
                 products: products,
-
+                // csrfToken: req.csrfToken()
             });
     })
     .catch(err => console.log(err))

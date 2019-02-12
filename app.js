@@ -2,6 +2,7 @@
 
 // require express function
 const express = require('express');
+
 //require handlebars function
 const exphbs = require('express-handlebars');
 //require body-parser
@@ -11,7 +12,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const csrf = require('csurf');
+// const csrf = require('csurf');
+// const flash = require('connect-flash');
+const multer = require('multer');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -24,9 +27,23 @@ const store = new MongoDBStore({
     uri: MONGODB_URI,
     collection: 'sessions',
   });
-const csrfProtection = csrf({});
+// const csrfProtection = csrf({});
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) =>{
+    cb(null, 'images')
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().getTime() + '-' + file.originalname);
+  }
+});
 
-
+const fileFilter = (req, file, cb) =>{
+  if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
+    cb(null, true);
+  } else{
+    cb(null, false);
+  }
+}
 
 
 app.engine('handlebars', exphbs({
@@ -47,6 +64,7 @@ const authRoutes = require('./routes/auth');
 
 // static files middleware path (css,image, javscript)
 app.use(express.static(__dirname));
+app.use(multer({storage:fileStorage, fileFilter: fileFilter}).single('image'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
     session({
@@ -56,7 +74,8 @@ app.use(
       store: store
     })
   );
-  app.use(csrfProtection);
+  // app.use(csrfProtection);
+  // app.use(flash());
 
 app.use((req, res, next) => {
     if (!req.session.user) {
@@ -72,7 +91,7 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) =>{
   res.locals.isAuthenticated = req.session.isLoggedIn;
-  res.locals.csrfToken = req.csrfToken();
+  // res.locals.csrfToken = req.csrfToken();
   next();
 });
 

@@ -22,7 +22,7 @@
                     {{#each prods}}
 					<tr class="rem1">
 						<td class="invert">{{this._id}}</td>
-						<td class="invert-image"><a href="single.html"><img src="{{this.imageUrl}}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert-image"><a href="single.html"><img src="/{{this.imageUrl}}" alt=" " class="img-responsive" /></a></td>
 						<td class="invert">{{this.name}}</td>
 						<td class="invert">{{this.description}}</td>
 						<td class="invert">{{this.tags}}</td>
@@ -31,7 +31,7 @@
                             <a href="/client/edit-product/{{this._id}}?edit=true" class = "btn btn-success">EDIT</a> <br><br>
                             <form action="/client/delete-product" method = "POST">
                                 <input type="hidden" value ="{{this._id}}" name ="id">
-								<input type="hidden" name="_csrf" value="{{csrfToken}}">
+								<input type="hidden" name="_csrf" value="{‌{@root.csrfToken}}">
 								<button class="btn btn-danger">DEL</button>
                             </form>
 

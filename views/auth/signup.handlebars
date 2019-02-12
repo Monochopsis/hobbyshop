@@ -1,5 +1,6 @@
 <!-- register -->
 	<div class="register">
+
 		<div class="container">
 			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Register Here</h3>
 			<p class="est animated wow zoomIn" data-wow-delay=".5s">If you do not have a account yet, Register Now!</p>
@@ -7,14 +8,12 @@
 				<h6 class="animated wow slideInUp" data-wow-delay=".5s">Login information</h6>
 				<form action ="/signup" method="POST" class="animated wow slideInUp" data-wow-delay=".5s">
 					{{!-- <input type="text" placeholder="Username" required=" " > --}}
-					<input type="email" name ="email" placeholder="Email Address" required=" " >
-					<input type="password" name="password" placeholder="Password" required=" " >
-					{{!-- <input type="password" name="confirmPassword"placeholder="Password Confirmation" required=" " > --}}
-					{{!-- <div class="register-check-box">
-						<div class="check">
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>I accept the terms and conditions</label>
-						</div> --}}
-					{{!-- </div> --}}
+					<input type="email" name ="email" placeholder="Email Address" required=" " value="{{oldInput.email}}">
+					<input type="password" name="password" placeholder="Password" required=" " value="{{oldInput.password}}">
+					<input type="password" name="confirmPassword"placeholder="Password Confirmation" required=" " >
+					{{#if errorMessage}}
+						<p>{{errorMessage}}</p>
+					{{/if}}
 					<input type="submit" value="Register">
 					<input type="hidden" name="_csrf" value="{{csrfToken}}">
 				</form>

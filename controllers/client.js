@@ -15,7 +15,11 @@ exports.postAddProduct = (req, res, next) => {
     const tags = req.body.tags;
     const description = req.body.description;
     const price= req.body.price;
-    const imageUrl = req.body.imageUrl;
+    const image = req.file;
+    if(!image){
+        return res.redirect('Error!')
+    }
+    const imageUrl = image.path;
     const product = new Product({
         name: name,
         tags: tags,
@@ -35,6 +39,8 @@ exports.postAddProduct = (req, res, next) => {
         console.log(err);
     })
   };
+
+  
 
 exports.getEditProduct = (req, res, next) => {
     const editMode = req.query.edit;
@@ -64,26 +70,32 @@ exports.postEditProduct = (req, res, next)=>{
     const updatedTags = req.body.tags;
     const updatedDescription = req.body.description;
     const updatedPrice = req.body.price;
-    const updatedImageUrl = req.body.imageUrl;
+    const image = req.file;
 
     Product.findById(id)
         .then(product =>{
+            if(product.userId.toString() !== req.user._id.toString()){
+                return res.redirect('/')
+            }
             product.name = updatedName;
             product.tags = updatedTags;
             product.description = updatedDescription;
             product.price = updatedPrice;
-            product.imageUrl = updatedImageUrl
+            if(image){
+                product.imageUrl = image.path;
+            }
+            
             return product.save()
-        })
-        .then(() =>{
-            console.log('UPDATED PRODUCT');
-            res.redirect('/client/c-products');
+            .then(() =>{
+                console.log('UPDATED PRODUCT');
+                res.redirect('/client/c-products');
+            });
         })
         .catch(err => console.log(err))
     };
 
 exports.getMyProduct = (req, res,next) =>{
-    Product.find()
+    Product.find({userId: req.user._id})
     // .select('title price -_id')
     // .populate('userId', 'name')
     .then(products =>{
@@ -100,7 +112,7 @@ exports.getMyProduct = (req, res,next) =>{
 
 exports.postDeleteProduct = (req, res, next) =>{
     const id = req.body.id;
-    Product.findByIdAndRemove(id)
+    Product.deleteOne({_id: id, userId: req.user._id})
     .then(() =>{
         console.log('DESTROYED PRODUCT!')
         res.redirect('/client/c-products');

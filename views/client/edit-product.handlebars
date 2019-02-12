@@ -64,28 +64,21 @@
             <h3 class="animated wow zoomIn" data-wow-delay=".5s">{{#if editing }}UPDATE PROD{{else}}ADD PROD{{/if}}</h3>
             <p class="est animated wow zoomIn" data-wow-delay=".5s">Add your Products here</p>
             <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-                <form action = "/client/{{#if editing }}edit-product{{else}}add-product{{/if}}" method="POST">
+                <form action = "/client/{{#if editing }}edit-product{{else}}add-product{{/if}}" method="POST" enctype="multipart/form-data">
                     <input type="search" class = "form-control" name="name" id="" placeholder="Product Name" value="{{#if editing }}{{product.name}}{{/if}}"> <br>
                     <input  value="" name ="tags" data-role="tagsinput" placeholder="Add Tags" />
+                    <p>Please don't Enter, just add comma every tag</p>
                     <br><br>
                     <textarea class = "form-control" name="description" id="" cols="30" rows="10" placeholder=" Product Description Here" >{{#if editing }}{{product.description}}{{/if}}</textarea>
                     <br>
                     <label for="price">Price:</label>
                     <input type= "number" class = "form-control" name = "price" value="{{#if editing }}{{product.price}}{{/if}}" step = "any"><br/>
+                    {{!-- <label for="">Upload Image of the Product here.</label>
+                    <input type="search" class = "form-control" name = "imageUrl" class = "form-control-file" id=""value="{{#if editing }}{{product.imageUrl}}{{/if}}"> --}}
                     <label for="">Upload Image of the Product here.</label>
-                    <input type="search" class = "form-control" name = "imageUrl" class = "form-control-file" id=""value="{{#if editing }}{{product.imageUrl}}{{/if}}">
+                    <input type="file" class = "form-control" name = "image" class = "form-control-file" id="">
+                    
                     <br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="mode">
-                        <label class="form-check-label">
-                            Pick and Pay
-                        </label>
-                        <br>
-                        <input class="form-check-input" type="checkbox" name="mode">
-                        <label class="form-check  -label">
-                            Pay with Credit Card
-                        </label>
-                    </div>
                     {{#if editing }}
                     <input type="hidden" value = "{{product._id}}" name="id">
                     {{/if}}
@@ -146,7 +139,7 @@
       this.inputSize = Math.max(1, this.placeholderText.length);
 
       this.$container = $('<div class="bootstrap-tagsinput"></div>');
-      this.$input = $('<input type="search" value="{{#if editing }}{{product.tags}}{{/if}}," class = "form-control" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+      this.$input = $('<input type="search" value="{{#if editing }}{{product.tags}}{{/if}}" class = "form-control" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
       this.$element.before(this.$container);
 
