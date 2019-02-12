@@ -30,6 +30,9 @@ router.post('/cart', isAuth, shopController.postCart);
 //route POST for cart delete
 router.post('/cart-delete-item', isAuth, shopController.postCartDeleteProduct);
 
+//route POST for checkout
+router.get('/checkout', isAuth, shopController.getCheckout);
+
 //route POST for creating order
 router.post('/create-order', isAuth, shopController.postOrder)
 
@@ -40,20 +43,5 @@ router.get('/orders', isAuth, shopController.getOrders);
 
 
 
-// router.get('/register', shopController.registerUser);
-
-// //route GET for premium
-// router.get('/premium',(req,res)=>{
-//     res.render('premium',{
-//         pageTitle: 'Premium'
-//     });
-// });
-
-// //route GET for auction
-// router.get('/auction',(req,res)=>{
-//     res.render('auction',{
-//         pageTitle: 'Auction',
-//     });
-// });
 
 module.exports = router;

@@ -62,21 +62,14 @@
 
 			<div class="checkout-left">
 				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
-					<h4>Continue to basket</h4>
-					<ul>
-						<li>Total Service Charges <i>-</i> <span>SERVICE CHARGE HERE0</span></li>
-						<li>Total <i>-</i> <span>TOTAL PRICE HERE</span></li>
-					</ul>
-
-				</div>
-				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-					<form action="/create-order" method="POST">
+					{{!-- <form action="/create-order" method="POST">
 						<input type="hidden" name="_csrf" value="{{csrfToken}}">
 						<button class = "btn btn-default btn-lg">CHECK OUT AND PAY!</button>
-					</form>
-					<br><br>
+					</form> --}}
+					<a class ="btn btn-default btn-lg" href="/checkout">Order Now!</a>
+				</div>
+				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
 					<a href="/products"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
-
 				</div>
 				<div class="clearfix"> </div>
 			</div>

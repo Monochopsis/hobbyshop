@@ -1,0 +1,76 @@
+
+
+<!-- checkout -->
+<body>
+	 {{#if products}}
+	<div class="checkout">
+		<div class="container">
+			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains</h3>
+			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Product Name</th>
+							<th>Price</th>
+
+						</tr>
+					</thead>
+					{{#each products}}
+					<tr class="rem1">
+						<td class="invert-image"><a href="single.html"><img src="/{{this.productId.imageUrl}}" alt=" " class="img-responsive" /></a></td>
+						<td class="invert">
+							 <div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value" value = "{{this.quantity}}"><span>{{this.quantity}}</span></div><br>
+
+								</div>
+							</div>
+						</td>
+						<td class="invert">{{this.productId.name}}</td>
+						<td class="invert">{{this.productId.price}}</td>
+
+					</tr>
+						{{/each}}
+
+				</table>
+
+			</div>
+
+			<div class="checkout-left">
+				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+					<h4>Continue to basket</h4>
+					<ul>
+						<li>Total Service Charges <i>-</i> <span>50</span></li>
+						<li>Total <i>-</i> <span>{{totalSum}}</span></li>
+					</ul>
+					<form action="/create-order" method="POST">
+                        <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_J1GczIIhy8a1vPi3st6xlfPD"
+                            data-amount="{{totalSum}}"
+                            data-name="Your Order"
+                            data-description="All the items you ordered"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto"
+                            data-currency="php"
+                            >
+
+                        </script>
+                    </form>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+				{{else}}
+					<h1>NO PRODUCT IN THE CART!</h1> --}}
+				{{/if}}
+</body>
+<!-- //checkout -->
+{{!-- {"products":[],"totalPrice":0} --}}
+
+
+
+

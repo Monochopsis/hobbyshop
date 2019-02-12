@@ -1,8 +1,11 @@
 const Product = require('../models/product');
 const Order = require('../models/order');
 
+const stripe = require("stripe")("sk_test_r8RAHMnMTjcPOgdtfOlK7YTj");
+
 
   exports.getProducts = (req, res, next)=>{
+    const page = req.query.page;
     Product.find()
     .then(products =>{
         console.log(products)
@@ -92,11 +95,44 @@ exports.postCartDeleteProduct = (req, res, next) =>{
     .catch(err => console.log(err))
 };
 
-exports.postOrder = (req,res,next) => {
+exports.getCheckout = (req, res, next) =>{
     req.user
     .populate('cart.items.productId')
     .execPopulate()
     .then(user =>{
+
+        const products = user.cart.items;
+        let total = 0;
+        products.forEach (p =>{
+            total += p.quantity * p.productId.price;
+        });
+    res.render('shop/checkout', {
+        pageTitle: 'Checkout  ',
+        path: '/checkout',
+        products : products,
+        totalSum: total * 100
+    });
+
+})
+}
+
+exports.postOrder = (req,res,next) => {
+    // Set your secret key: remember to change this to your live secret key in production
+    // See your keys here: https://dashboard.stripe.com/account/apikeys
+
+
+    // Token is created using Checkout or Elements!
+    // Get the payment token ID submitted by the form:
+    const token = req.body.stripeToken; // Using Express
+
+    let totalSum = 0;
+    req.user
+    .populate('cart.items.productId')
+    .execPopulate()
+    .then(user =>{
+        user.cart.items.forEach(p =>{
+            totalSum += p.quantity * p.productId.price;
+        });
         const products = user.cart.items.map(i =>{
             return {quantity: i.quantity, product: {...i.productId._doc}};
         });
@@ -109,6 +145,15 @@ exports.postOrder = (req,res,next) => {
         });
             return order.save();
         }).then(result =>{
+            (async () => {
+                const charge = await stripe.charges.create({
+                    amount: totalSum * 100,
+                    currency: 'php',
+                    description: 'Order',
+                    source: token,
+                    metadata:{order_id: result._id.toString()}
+                });
+                })();
             return req.user.clearCart();
         }).then(() =>{
             res.redirect('/orders')
