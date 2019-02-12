@@ -33,8 +33,8 @@
 						<td class="invert">{{this.productId.price}}</td>
 						<td class="invert">
 							<form action="/cart-delete-item" method="POST">
-								<input type="hidden" value="{{this.productId._id}}" name="id">
 								<input type="hidden" name="_csrf" value="{{csrfToken}}">
+								<input type="hidden" value="{{this.productId._id}}" name="id">
 								<div class="rem">
 									<button class="close1"></button>
 								</div>

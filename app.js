@@ -76,7 +76,6 @@ app.use((req, res, next) =>{
   next();
 });
 
-app.use(csrfProtection);
 
 // app.use('/admin', adminData.routes);
 app.use('/client', clientRoutes);
